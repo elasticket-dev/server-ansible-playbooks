@@ -9,14 +9,12 @@
 #Setting new ROOT password to CentOS
 - name: Set the MySQL root password
   shell: mysqladmin -u root --password='{{ mysql_root_temp_password.stdout }}' password '{{ mysql.password }}'
-  register: mysql.password_result
   when: mysql.password is defined and mysql.password != "" and ansible_os_family == "RedHat"
   tags:
     - mysql
 
 - name: Set the MySQL root password
   shell: mysqladmin -u root password '{{ mysql.password }}'
-  register: mysql.password_result
   when: mysql.password is defined and mysql.password != "" and ansible_os_family == "Debian"
   tags:
     - mysql
