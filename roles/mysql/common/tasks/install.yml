@@ -16,8 +16,8 @@
   #APT
 - name: Add Mysql apt key.
   apt_key:
-    keyserver: ha.pool.sks-keyservers.net
-    id: A4A9406876FCBD3C456770C88C718D3B5072E1F5
+    keyserver: keyserver.ubuntu.com
+    id: 36A1D7869245C8950F966E92D8576A8BA88D21E9
     state: present
   when: ansible_os_family == "Debian"
   tags:
@@ -45,6 +45,7 @@
   apt: 
     name={{ item }} 
     state=present
+    allow_unauthenticated=yes
   with_items: '{{mysql_role.packages}}'
   when: ansible_os_family == "Debian"
   tags:
